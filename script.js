@@ -328,10 +328,6 @@ const configPecas = {
     'util-g': { peso: 150, horas: 8, suporte: 0, pintura: 0 }
 };
 
-// Elementos da aba de sugestões
-const configPrecoKilo = document.getElementById('configPrecoKilo');
-const configMargem = document.getElementById('configMargem');
-
 function calcularCustoPeca(config, precoKilo, potencia = 350, precoKwh = 0.85) {
     // Custo do filamento (peça + suporte)
     const custoFilamento = ((config.peso + config.suporte) * precoKilo) / 1000;
@@ -345,8 +341,11 @@ function calcularCustoPeca(config, precoKilo, potencia = 350, precoKwh = 0.85) {
 }
 
 function calcularSugestoes() {
-    const precoKilo = parseFloat(configPrecoKilo.value) || 120;
-    const margem = parseFloat(configMargem.value) || 100;
+    const configPrecoKilo = document.getElementById('configPrecoKilo');
+    const configMargem = document.getElementById('configMargem');
+
+    const precoKilo = parseFloat(configPrecoKilo?.value) || 150;
+    const margem = parseFloat(configMargem?.value) || 500;
 
     // Para cada tipo de peça, calcular e atualizar
     Object.keys(configPecas).forEach(tipo => {
@@ -354,8 +353,8 @@ function calcularSugestoes() {
         const custo = calcularCustoPeca(config, precoKilo);
         const venda = custo * (1 + margem / 100);
 
-        // Converter tipo para IDs dos elementos (flexi-p -> flexiP)
-        const idBase = tipo.replace(/-([a-z])/g, (match, letter) => letter.toUpperCase());
+        // Converter tipo para IDs dos elementos (flexi-p -> flexiP, estatua-xg -> estatuaXG)
+        const idBase = tipo.replace(/-([a-z]+)/g, (match, letters) => letters.toUpperCase());
 
         const custoEl = document.getElementById(`${idBase}Custo`);
         const vendaEl = document.getElementById(`${idBase}Venda`);
@@ -366,6 +365,9 @@ function calcularSugestoes() {
 }
 
 function setupSugestoes() {
+    const configPrecoKilo = document.getElementById('configPrecoKilo');
+    const configMargem = document.getElementById('configMargem');
+
     // Recalcular quando alterar configurações
     if (configPrecoKilo) {
         configPrecoKilo.addEventListener('input', calcularSugestoes);
