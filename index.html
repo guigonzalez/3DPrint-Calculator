@@ -13,7 +13,15 @@
             <p class="subtitle">Calcule custos e preço de venda de forma automatizada</p>
         </header>
 
+        <!-- Navegação por Abas -->
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="calculadora">🧮 Calculadora</button>
+            <button class="tab-btn" data-tab="sugestoes">💡 Sugestões de Preços</button>
+        </nav>
+
         <main>
+            <!-- Aba Calculadora -->
+            <div class="tab-content active" id="tab-calculadora">
             <!-- Seção 1: Filamento -->
             <section class="card">
                 <div class="card-header">
@@ -199,6 +207,217 @@
                     </div>
                 </div>
             </section>
+            </div>
+
+            <!-- Aba Sugestões de Preços -->
+            <div class="tab-content" id="tab-sugestoes">
+                <section class="card">
+                    <h2>💡 Tabela de Sugestões de Preços</h2>
+                    <p class="card-description">Valores de referência baseados em configurações padrões do mercado. Use como ponto de partida e ajuste conforme sua realidade.</p>
+
+                    <div class="config-padrao">
+                        <h4>⚙️ Configurações Base</h4>
+                        <div class="config-grid">
+                            <div class="config-item">
+                                <label for="configPrecoKilo">Preço do Kilo (R$)</label>
+                                <input type="number" id="configPrecoKilo" value="120" min="0" step="1">
+                            </div>
+                            <div class="config-item">
+                                <label for="configMargem">Margem de Lucro (%)</label>
+                                <input type="number" id="configMargem" value="100" min="0" step="5">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Peças Flexi -->
+                <section class="card sugestao-categoria">
+                    <div class="categoria-header">
+                        <span class="categoria-icon">🐉</span>
+                        <h3>Peças Articuladas (Flexi)</h3>
+                    </div>
+                    <p class="categoria-desc">Dragões, cobras, polvos e outros modelos articulados. Não precisam de suporte.</p>
+                    <div class="tabela-precos">
+                        <div class="preco-item" data-tipo="flexi-p">
+                            <div class="preco-info">
+                                <span class="preco-nome">Flexi Pequeno</span>
+                                <span class="preco-detalhes">~30g | 2h impressão | até 10cm</span>
+                            </div>
+                            <div class="preco-valores">
+                                <span class="preco-custo">Custo: <strong id="flexiPCusto">R$ 0</strong></span>
+                                <span class="preco-venda">Venda: <strong id="flexiPVenda">R$ 0</strong></span>
+                            </div>
+                        </div>
+                        <div class="preco-item" data-tipo="flexi-m">
+                            <div class="preco-info">
+                                <span class="preco-nome">Flexi Médio</span>
+                                <span class="preco-detalhes">~60g | 4h impressão | 10-20cm</span>
+                            </div>
+                            <div class="preco-valores">
+                                <span class="preco-custo">Custo: <strong id="flexiMCusto">R$ 0</strong></span>
+                                <span class="preco-venda">Venda: <strong id="flexiMVenda">R$ 0</strong></span>
+                            </div>
+                        </div>
+                        <div class="preco-item" data-tipo="flexi-g">
+                            <div class="preco-info">
+                                <span class="preco-nome">Flexi Grande</span>
+                                <span class="preco-detalhes">~120g | 7h impressão | 20-30cm</span>
+                            </div>
+                            <div class="preco-valores">
+                                <span class="preco-custo">Custo: <strong id="flexiGCusto">R$ 0</strong></span>
+                                <span class="preco-venda">Venda: <strong id="flexiGVenda">R$ 0</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Estatuetas Sem Pintura -->
+                <section class="card sugestao-categoria">
+                    <div class="categoria-header">
+                        <span class="categoria-icon">🗿</span>
+                        <h3>Estatuetas Sem Pintura</h3>
+                    </div>
+                    <p class="categoria-desc">Miniaturas, action figures e bustos. Impressão em uma cor, sem acabamento.</p>
+                    <div class="tabela-precos">
+                        <div class="preco-item" data-tipo="estatua-p">
+                            <div class="preco-info">
+                                <span class="preco-nome">Miniatura Pequena</span>
+                                <span class="preco-detalhes">~25g | 3h | até 8cm | com suporte</span>
+                            </div>
+                            <div class="preco-valores">
+                                <span class="preco-custo">Custo: <strong id="estatuaPCusto">R$ 0</strong></span>
+                                <span class="preco-venda">Venda: <strong id="estatuaPVenda">R$ 0</strong></span>
+                            </div>
+                        </div>
+                        <div class="preco-item" data-tipo="estatua-m">
+                            <div class="preco-info">
+                                <span class="preco-nome">Estatueta Média</span>
+                                <span class="preco-detalhes">~80g | 6h | 8-15cm | com suporte</span>
+                            </div>
+                            <div class="preco-valores">
+                                <span class="preco-custo">Custo: <strong id="estatuaMCusto">R$ 0</strong></span>
+                                <span class="preco-venda">Venda: <strong id="estatuaMVenda">R$ 0</strong></span>
+                            </div>
+                        </div>
+                        <div class="preco-item" data-tipo="estatua-g">
+                            <div class="preco-info">
+                                <span class="preco-nome">Estatueta Grande</span>
+                                <span class="preco-detalhes">~200g | 12h | 15-25cm | com suporte</span>
+                            </div>
+                            <div class="preco-valores">
+                                <span class="preco-custo">Custo: <strong id="estatuaGCusto">R$ 0</strong></span>
+                                <span class="preco-venda">Venda: <strong id="estatuaGVenda">R$ 0</strong></span>
+                            </div>
+                        </div>
+                        <div class="preco-item" data-tipo="estatua-xg">
+                            <div class="preco-info">
+                                <span class="preco-nome">Estatueta Extra Grande</span>
+                                <span class="preco-detalhes">~400g | 20h | +25cm | com suporte</span>
+                            </div>
+                            <div class="preco-valores">
+                                <span class="preco-custo">Custo: <strong id="estatuaXGCusto">R$ 0</strong></span>
+                                <span class="preco-venda">Venda: <strong id="estatuaXGVenda">R$ 0</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Estatuetas Com Pintura Detalhada -->
+                <section class="card sugestao-categoria">
+                    <div class="categoria-header">
+                        <span class="categoria-icon">🎨</span>
+                        <h3>Estatuetas Com Pintura</h3>
+                    </div>
+                    <p class="categoria-desc">Peças com acabamento profissional: primer, pintura detalhada e verniz.</p>
+                    <div class="tabela-precos">
+                        <div class="preco-item destaque-pintura" data-tipo="pintada-p">
+                            <div class="preco-info">
+                                <span class="preco-nome">Pintada Pequena</span>
+                                <span class="preco-detalhes">~25g | até 8cm | pintura básica</span>
+                            </div>
+                            <div class="preco-valores">
+                                <span class="preco-custo">Custo: <strong id="pintadaPCusto">R$ 0</strong></span>
+                                <span class="preco-venda">Venda: <strong id="pintadaPVenda">R$ 0</strong></span>
+                            </div>
+                        </div>
+                        <div class="preco-item destaque-pintura" data-tipo="pintada-m">
+                            <div class="preco-info">
+                                <span class="preco-nome">Pintada Média</span>
+                                <span class="preco-detalhes">~80g | 8-15cm | pintura detalhada</span>
+                            </div>
+                            <div class="preco-valores">
+                                <span class="preco-custo">Custo: <strong id="pintadaMCusto">R$ 0</strong></span>
+                                <span class="preco-venda">Venda: <strong id="pintadaMVenda">R$ 0</strong></span>
+                            </div>
+                        </div>
+                        <div class="preco-item destaque-pintura" data-tipo="pintada-g">
+                            <div class="preco-info">
+                                <span class="preco-nome">Pintada Grande</span>
+                                <span class="preco-detalhes">~200g | 15-25cm | pintura premium</span>
+                            </div>
+                            <div class="preco-valores">
+                                <span class="preco-custo">Custo: <strong id="pintadaGCusto">R$ 0</strong></span>
+                                <span class="preco-venda">Venda: <strong id="pintadaGVenda">R$ 0</strong></span>
+                            </div>
+                        </div>
+                        <div class="preco-item destaque-pintura" data-tipo="pintada-xg">
+                            <div class="preco-info">
+                                <span class="preco-nome">Pintada Extra Grande</span>
+                                <span class="preco-detalhes">~400g | +25cm | pintura premium</span>
+                            </div>
+                            <div class="preco-valores">
+                                <span class="preco-custo">Custo: <strong id="pintadaXGCusto">R$ 0</strong></span>
+                                <span class="preco-venda">Venda: <strong id="pintadaXGVenda">R$ 0</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Utilitários -->
+                <section class="card sugestao-categoria">
+                    <div class="categoria-header">
+                        <span class="categoria-icon">🔧</span>
+                        <h3>Peças Utilitárias</h3>
+                    </div>
+                    <p class="categoria-desc">Suportes, organizadores, cases e peças funcionais.</p>
+                    <div class="tabela-precos">
+                        <div class="preco-item" data-tipo="util-p">
+                            <div class="preco-info">
+                                <span class="preco-nome">Utilitário Pequeno</span>
+                                <span class="preco-detalhes">~20g | 1.5h | até 5cm</span>
+                            </div>
+                            <div class="preco-valores">
+                                <span class="preco-custo">Custo: <strong id="utilPCusto">R$ 0</strong></span>
+                                <span class="preco-venda">Venda: <strong id="utilPVenda">R$ 0</strong></span>
+                            </div>
+                        </div>
+                        <div class="preco-item" data-tipo="util-m">
+                            <div class="preco-info">
+                                <span class="preco-nome">Utilitário Médio</span>
+                                <span class="preco-detalhes">~50g | 3h | 5-12cm</span>
+                            </div>
+                            <div class="preco-valores">
+                                <span class="preco-custo">Custo: <strong id="utilMCusto">R$ 0</strong></span>
+                                <span class="preco-venda">Venda: <strong id="utilMVenda">R$ 0</strong></span>
+                            </div>
+                        </div>
+                        <div class="preco-item" data-tipo="util-g">
+                            <div class="preco-info">
+                                <span class="preco-nome">Utilitário Grande</span>
+                                <span class="preco-detalhes">~150g | 8h | +12cm</span>
+                            </div>
+                            <div class="preco-valores">
+                                <span class="preco-custo">Custo: <strong id="utilGCusto">R$ 0</strong></span>
+                                <span class="preco-venda">Venda: <strong id="utilGVenda">R$ 0</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card aviso">
+                    <p>⚠️ <strong>Importante:</strong> Estes valores são estimativas baseadas em médias de mercado. Ajuste conforme o custo real do seu filamento, tempo de impressão e complexidade da pintura. Use a aba <strong>Calculadora</strong> para cálculos precisos.</p>
+                </section>
+            </div>
         </main>
 
         <footer>

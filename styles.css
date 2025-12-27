@@ -53,6 +53,48 @@ header h1 {
     font-size: 1rem;
 }
 
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    background: var(--bg-card);
+    padding: 8px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tab-btn:hover {
+    color: var(--text-primary);
+    background: var(--bg-input);
+}
+
+.tab-btn.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
 /* Cards */
 .card {
     background: var(--bg-card);
@@ -456,4 +498,190 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input[type="number"] {
     -moz-appearance: textfield;
+}
+
+/* ============================================
+   ABA SUGESTÕES DE PREÇOS
+   ============================================ */
+
+.card-description {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Configurações Base */
+.config-padrao {
+    background: var(--bg-input);
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 16px;
+}
+
+.config-padrao h4 {
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.config-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.config-item label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+.config-item input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.config-item input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+@media (max-width: 500px) {
+    .config-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Categoria de Sugestões */
+.sugestao-categoria {
+    margin-bottom: 20px;
+}
+
+.categoria-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.categoria-icon {
+    font-size: 1.5rem;
+}
+
+.categoria-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.categoria-desc {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+}
+
+/* Tabela de Preços */
+.tabela-precos {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.preco-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: var(--bg-input);
+    border-radius: 10px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+.preco-item:hover {
+    border-color: var(--primary-color);
+    transform: translateX(4px);
+}
+
+.preco-item.destaque-pintura {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(99, 102, 241, 0.15));
+    border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.preco-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.preco-nome {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.preco-detalhes {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.preco-valores {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.preco-custo {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.preco-custo strong {
+    color: var(--warning-color);
+}
+
+.preco-venda {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.preco-venda strong {
+    color: var(--success-color);
+    font-size: 1.1rem;
+}
+
+@media (max-width: 500px) {
+    .preco-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .preco-valores {
+        align-items: flex-start;
+        flex-direction: row;
+        gap: 16px;
+        width: 100%;
+    }
+}
+
+/* Card de Aviso */
+.card.aviso {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.card.aviso p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.card.aviso strong {
+    color: var(--warning-color);
 }
