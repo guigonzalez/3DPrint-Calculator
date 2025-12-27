@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Custos - Impressão 3D</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🖨️ Calculadora de Custos de Impressão 3D</h1>
+            <p class="subtitle">Calcule custos e preço de venda de forma automatizada</p>
+        </header>
+
+        <main>
+            <!-- Seção 1: Filamento -->
+            <section class="card">
+                <div class="card-header">
+                    <span class="card-number">1</span>
+                    <h2>Filamento</h2>
+                </div>
+                <div class="card-content">
+                    <div class="input-group">
+                        <label for="pesoPeca">Peso da peça (gramas)</label>
+                        <input type="number" id="pesoPeca" placeholder="Ex: 50" min="0" step="0.1">
+                        <span class="hint">Valor informado pelo software de fatiamento (Cura, PrusaSlicer, etc.)</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="precoKilo">Preço do kilo (R$)</label>
+                        <input type="number" id="precoKilo" placeholder="Ex: 120" min="0" step="0.01">
+                        <span class="hint">Valor pago por 1kg de filamento</span>
+                    </div>
+                    <div class="custo-parcial">
+                        <span>Custo do filamento:</span>
+                        <span id="custoFilamento">R$ 0,00</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 2: Suportes -->
+            <section class="card">
+                <div class="card-header">
+                    <span class="card-number">2</span>
+                    <h2>Suportes</h2>
+                    <label class="toggle">
+                        <input type="checkbox" id="usaSuporte">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="card-content collapsible" id="suporteContent">
+                    <div class="input-group">
+                        <label for="pesoSuporte">Peso dos suportes (gramas)</label>
+                        <input type="number" id="pesoSuporte" placeholder="Ex: 10" min="0" step="0.1">
+                        <span class="hint">Material de suporte que será descartado</span>
+                    </div>
+                    <div class="custo-parcial">
+                        <span>Custo dos suportes:</span>
+                        <span id="custoSuporte">R$ 0,00</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 3: Tempo e Energia -->
+            <section class="card">
+                <div class="card-header">
+                    <span class="card-number">3</span>
+                    <h2>Tempo e Energia</h2>
+                </div>
+                <div class="card-content">
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="tempoHoras">Horas</label>
+                            <input type="number" id="tempoHoras" placeholder="0" min="0" step="1">
+                        </div>
+                        <div class="input-group">
+                            <label for="tempoMinutos">Minutos</label>
+                            <input type="number" id="tempoMinutos" placeholder="0" min="0" max="59" step="1">
+                        </div>
+                    </div>
+                    <span class="hint">Tempo total de impressão informado pelo fatiador</span>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="potenciaImpressora">Potência da impressora (W)</label>
+                            <input type="number" id="potenciaImpressora" placeholder="Ex: 350" min="0" step="1" value="350">
+                        </div>
+                        <div class="input-group">
+                            <label for="precoKwh">Preço kWh (R$)</label>
+                            <input type="number" id="precoKwh" placeholder="Ex: 0.85" min="0" step="0.01" value="0.85">
+                        </div>
+                    </div>
+                    <div class="custo-parcial">
+                        <span>Custo de energia:</span>
+                        <span id="custoEnergia">R$ 0,00</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 4: Pintura -->
+            <section class="card">
+                <div class="card-header">
+                    <span class="card-number">4</span>
+                    <h2>Pintura</h2>
+                    <label class="toggle">
+                        <input type="checkbox" id="usaPintura">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="card-content collapsible" id="pinturaContent">
+                    <div class="input-group">
+                        <label for="tamanhoPeca">Tamanho da peça</label>
+                        <select id="tamanhoPeca">
+                            <option value="0">Selecione...</option>
+                            <option value="15">Pequena (até 5cm) - R$ 15</option>
+                            <option value="30">Média (5-15cm) - R$ 30</option>
+                            <option value="50">Grande (15-25cm) - R$ 50</option>
+                            <option value="80">Extra Grande (+25cm) - R$ 80</option>
+                        </select>
+                        <span class="hint">Estimativa baseada no tamanho (inclui materiais e mão de obra)</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="custoPinturaCustom">Custo personalizado (R$)</label>
+                        <input type="number" id="custoPinturaCustom" placeholder="Opcional" min="0" step="0.01">
+                        <span class="hint">Sobrescreve o valor do tamanho acima</span>
+                    </div>
+                    <div class="custo-parcial">
+                        <span>Custo de pintura:</span>
+                        <span id="custoPintura">R$ 0,00</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 5: Lucro e Preço -->
+            <section class="card">
+                <div class="card-header">
+                    <span class="card-number">5</span>
+                    <h2>Lucro e Preço</h2>
+                </div>
+                <div class="card-content">
+                    <div class="input-group">
+                        <label for="margemLucro">Margem de lucro (%)</label>
+                        <input type="number" id="margemLucro" placeholder="Ex: 100" min="0" step="1" value="100">
+                        <div class="margin-suggestions">
+                            <button type="button" class="margin-btn" data-margin="50">50%</button>
+                            <button type="button" class="margin-btn" data-margin="100">100%</button>
+                            <button type="button" class="margin-btn" data-margin="150">150%</button>
+                            <button type="button" class="margin-btn" data-margin="200">200%</button>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="precoCustom">Preço de venda personalizado (R$)</label>
+                        <input type="number" id="precoCustom" placeholder="Opcional - Ex: 149.90" min="0" step="0.01">
+                        <span class="hint">Se preenchido, calcula a margem real para este preço</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resultado -->
+            <section class="card resultado">
+                <h2>📊 Resultado</h2>
+                <div class="resultado-grid">
+                    <div class="resultado-item custo-total">
+                        <span class="resultado-label">Custo Total</span>
+                        <span class="resultado-valor" id="custoTotal">R$ 0,00</span>
+                    </div>
+                    <div class="resultado-item lucro">
+                        <span class="resultado-label">Lucro</span>
+                        <span class="resultado-valor" id="lucroValor">R$ 0,00</span>
+                    </div>
+                    <div class="resultado-item preco-venda">
+                        <span class="resultado-label">Preço de Venda</span>
+                        <span class="resultado-valor" id="precoVenda">R$ 0,00</span>
+                    </div>
+                    <div class="resultado-item margem-real">
+                        <span class="resultado-label">Margem Real</span>
+                        <span class="resultado-valor" id="margemReal">0%</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projeção de Lucro -->
+            <section class="card projecao">
+                <h2>📈 Projeção de Lucro</h2>
+                <div class="card-content">
+                    <div class="input-group">
+                        <label for="vendasMes">Vendas por Mês: <span id="vendasMesValor">10</span></label>
+                        <input type="range" id="vendasMes" min="1" max="100" value="10">
+                    </div>
+                    <div class="projecao-grid">
+                        <div class="projecao-item">
+                            <span class="projecao-label">Faturamento Mensal</span>
+                            <span class="projecao-valor" id="faturamentoMensal">R$ 0,00</span>
+                        </div>
+                        <div class="projecao-item destaque">
+                            <span class="projecao-label">Lucro Mensal</span>
+                            <span class="projecao-valor" id="lucroMensal">R$ 0,00</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Desenvolvido para impressores 3D 🎨</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
